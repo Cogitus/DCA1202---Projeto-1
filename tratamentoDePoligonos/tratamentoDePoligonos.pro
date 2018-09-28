@@ -4,7 +4,9 @@ CONFIG -= app_bundle
 CONFIG -= qt
 
 SOURCES += main.cpp \
-    ponto.cpp
+    ponto.cpp \
+    poligono.cpp
 
 HEADERS += \
-    ponto.h
+    ponto.h \
+    poligono.h
