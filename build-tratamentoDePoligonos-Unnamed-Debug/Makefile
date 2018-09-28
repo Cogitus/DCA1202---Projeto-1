@@ -51,9 +51,11 @@ OBJECTS_DIR   = ./
 ####### Files
 
 SOURCES       = ../tratamentoDePoligonos/main.cpp \
-		../tratamentoDePoligonos/ponto.cpp 
+		../tratamentoDePoligonos/ponto.cpp \
+		../tratamentoDePoligonos/poligono.cpp 
 OBJECTS       = main.o \
-		ponto.o
+		ponto.o \
+		poligono.o
 DIST          = /usr/lib/x86_64-linux-gnu/qt5/mkspecs/features/spec_pre.prf \
 		/usr/lib/x86_64-linux-gnu/qt5/mkspecs/common/unix.conf \
 		/usr/lib/x86_64-linux-gnu/qt5/mkspecs/common/linux.conf \
@@ -122,8 +124,10 @@ DIST          = /usr/lib/x86_64-linux-gnu/qt5/mkspecs/features/spec_pre.prf \
 		/usr/lib/x86_64-linux-gnu/qt5/mkspecs/features/exceptions.prf \
 		/usr/lib/x86_64-linux-gnu/qt5/mkspecs/features/yacc.prf \
 		/usr/lib/x86_64-linux-gnu/qt5/mkspecs/features/lex.prf \
-		../tratamentoDePoligonos/tratamentoDePoligonos.pro ponto.h ../tratamentoDePoligonos/main.cpp \
-		../tratamentoDePoligonos/ponto.cpp
+		../tratamentoDePoligonos/tratamentoDePoligonos.pro ponto.h \
+		poligono.h ../tratamentoDePoligonos/main.cpp \
+		../tratamentoDePoligonos/ponto.cpp \
+		../tratamentoDePoligonos/poligono.cpp
 QMAKE_TARGET  = tratamentoDePoligonos
 DESTDIR       = 
 TARGET        = tratamentoDePoligonos
@@ -317,11 +321,14 @@ compiler_clean:
 
 ####### Compile
 
-main.o: ../tratamentoDePoligonos/main.cpp 
+main.o: ../tratamentoDePoligonos/main.cpp ../tratamentoDePoligonos/ponto.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o main.o ../tratamentoDePoligonos/main.cpp
 
 ponto.o: ../tratamentoDePoligonos/ponto.cpp ../tratamentoDePoligonos/ponto.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o ponto.o ../tratamentoDePoligonos/ponto.cpp
+
+poligono.o: ../tratamentoDePoligonos/poligono.cpp ../tratamentoDePoligonos/poligono.h
+	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o poligono.o ../tratamentoDePoligonos/poligono.cpp
 
 ####### Install
 
