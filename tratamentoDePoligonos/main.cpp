@@ -1,18 +1,20 @@
 #include <iostream>
-#include "ponto.h"
+#include "poligono.h"
 
 using namespace std;
 
 int main (void) {
+    Poligono triangulo;
 
-    Ponto pontinho;
+    for(int i=0; i<3; i++) {
+        triangulo.insereVertice();
+    }
 
-    pontinho.setX(10);
-    pontinho.setY(7);
+    cout << "Coordenadas dos vertices do triangulo: \n";
 
-    cout<<"("<<pontinho.getX()<<","<<pontinho.getY()<<");"<<endl;
+    for(int i=0; i<3; i++) {
+        cout << "(" << triangulo.poligono[i].getX() << "," << triangulo.poligono[i].getY() << ")\n";
+    }
 
-    Ponto novopontinho = pontinho.add(pontinho);
 
-    cout<<"("<<novopontinho.getX()<<","<<novopontinho.getY()<<");"<<endl;
 }
