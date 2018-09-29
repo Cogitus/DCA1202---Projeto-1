@@ -17,13 +17,16 @@ void imprime(void);
 class Poligono{//Representa polígonos convexos.
 
 private:
-    Ponto* vertice; //tem que ser um ponteiro para poder alocar dinamicamente
-    int numeroDeVertices;
+     //tem que ser um ponteiro para poder alocar dinamicamente
+
+    int numeroDeVertices = 0;
 
 public:
     Poligono();
-    Poligono(int quantidadeVertices);
-    void insereVertice(float x, float y);
+    ~Poligono();
+    Ponto poligono[100];
+    void insereVertice();
+
 };
 
 #endif // POLIGONO_H
