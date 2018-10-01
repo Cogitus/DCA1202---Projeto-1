@@ -45,13 +45,35 @@ void Poligono::translada(float a, float b) {
 }
 
 
+//Rotacionar o polígono de θ graus no sentido anti-horário em torno de um ponto (x0,y0) fornecido pelo usuário
+//aparentemente, esta dando erro quando trata-se de girar em torno de um ponto fora da origem.
 void Poligono::rotaciona (float x0, float y0, float angulo) {
-    angulo = angulo*180/M_PI;//fator de multiplicação = 180/pi;
+    // a matriz de rotacao gira no sentido horario, precisamos girar no sentido anti horario:
+    angulo = -1*angulo;
+    // o fator de multiplicacao, para rodar em radianos
+    angulo = angulo*(M_PI/180);//fator de multiplicação = pi/180;
 
+    // isso é bizarro, mas acho melhor deixar rotaciona como uma função amiga ou algo assim
+    // devemos perceber que poligono é um conjunto de pontos e o método translada só funciona se fizermos
+    // poligono[i].translada(a,b),ainda que vá transladar todos os pontos, mas enfim.
+    // de qualquer forma, irei implementar como um metodo.
+    poligono[0].translada(-x0,-y0); //translado todos os meus pontos em uma distância de x0 e y0 à direita.
 
-    poligono.translada(-x0,-y0); //translado todos os meus pontos em uma distância de x0 e y0 à direita.
+    float novoX, novoY;
 
     for (int i=0; i<numeroDeVertices; i++) {
-        poligono[i].setX(getX()*angulo);
+
+        novoX = poligono[i].getX()*cos(angulo)+poligono[i].getY()*sin(angulo);
+        novoY = -1*sin(angulo)*poligono[i].getX()+poligono[i].getY()*cos(angulo);
+
+        //devido ao tipo float, eh preciso fazer esse tratamento:
+        if(abs(novoY)<=0.0000005)
+            novoY = 0;
+        if(abs(novoX)<=0.0000005)
+            novoX = 0;
+        // ao longo dos testes, os valores que deveriam ser nulos geralmente retornavam -4e-7 (-0.0000004)
+        poligono[i].setXY(novoX, novoY);
     }
+
+    poligono[0].translada(x0,y0); // colocando todos os pontos nos lugares certos
 }
