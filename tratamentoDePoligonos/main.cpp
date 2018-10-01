@@ -7,14 +7,11 @@ int main (void) {
     Poligono triangulo;
 
     for(int i=0; i<3; i++) {
-        triangulo.insereVertice();
+        triangulo.insereVertice(3, i);
     }
 
     cout << "Coordenadas dos vertices do triangulo: \n";
 
-    for(int i=0; i<3; i++) {
-        cout << "(" << triangulo.poligono[i].getX() << "," << triangulo.poligono[i].getY() << ")\n";
-    }
-
+    triangulo.imprime();
 
 }

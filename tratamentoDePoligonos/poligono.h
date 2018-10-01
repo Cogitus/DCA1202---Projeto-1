@@ -11,6 +11,12 @@ float area(void);
 void translada(float a, float b);
 void rotaciona(float x0, float y0); x0 e y0 é o ponto em que desejamos rotacionar o polígono!
 void imprime(void);
+
+//Ao tentarmos acessar na main polino[i], estamos tentando acessar um atributo privado, por tal
+motivo, estaremos fadados ao erro (tentando acessar um atributo privado através de um método
+público de um atributo privado).
+
+PESQUISAR MÉTODO DE SHOELACE.
 */
 
 
@@ -20,12 +26,15 @@ private:
      //tem que ser um ponteiro para poder alocar dinamicamente
 
     int numeroDeVertices = 0;
+    Ponto poligono[100];
 
 public:
     Poligono();
     ~Poligono();
-    Ponto poligono[100];
-    void insereVertice();
+    void insereVertice(float a, float b);
+    void imprime(void);
+    int quantidadeVertices(void);
+    void translada(float a, float b);
 
 };
 

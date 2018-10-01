@@ -14,23 +14,31 @@ Poligono::~Poligono() {
 }
 
 
-void Poligono::insereVertice() {
+void Poligono::insereVertice(float a, float b) {
 
     if (numeroDeVertices <= 100) {
-        float* coordenadaXtemporaria = new float[1];//variáveis temporárias para não gastar a memória stack a toa
-        float* coordenadaYtemporaria = new float[1];
-
-        cout << "x" << numeroDeVertices << " = ";
-        cin >> coordenadaXtemporaria[0];
-        cout << "y" << numeroDeVertices << " = ";
-        cin >> coordenadaYtemporaria[0];
-
-        poligono[numeroDeVertices].setX(coordenadaXtemporaria[0]);//setando o ponto seguinte começando por
-        poligono[numeroDeVertices].setY(coordenadaYtemporaria[0]);//X0,Y0. Por isso temos polígono[numeroDeVertices]
+        poligono[numeroDeVertices].setX(a);//setando o ponto seguinte começando por
+        poligono[numeroDeVertices].setY(b);//X0,Y0. Por isso temos polígono[numeroDeVertices]
 
         numeroDeVertices++;//incrementando o número de vértices a medida que os adiciono.
+    }
+}
 
-        delete [] coordenadaXtemporaria;//apagando as varriáveis temporárias.
-        delete [] coordenadaYtemporaria;
+
+void Poligono::imprime(void) {
+    for (int i=0; i<numeroDeVertices; i++) {
+        cout << "(" << poligono[i].getX() << "," << poligono[i].getY() << ")\n";
+    }
+}
+
+
+int Poligono::quantidadeVertices(void) {
+    return numeroDeVertices;
+}
+
+
+void Poligono::translada(float a, float b) {
+    for(int i=0; i<numeroDeVertices; i++) {//percorre todos os meus pontos
+        poligono[i].setXY(poligono[i].getX()+a, poligono[i].getY()+b);//soma os meus pontos x+a e y+b!
     }
 }
