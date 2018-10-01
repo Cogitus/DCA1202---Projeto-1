@@ -35,6 +35,7 @@ public:
     void imprime(void);
     int quantidadeVertices(void);
     void translada(float a, float b);
+    void rotaciona(float x0, float y0, float angulo);
 
 };
 
