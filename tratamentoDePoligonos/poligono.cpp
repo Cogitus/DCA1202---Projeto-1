@@ -59,12 +59,24 @@ void Poligono::rotaciona (float x0, float y0, float angulo) {
     // de qualquer forma, irei implementar como um metodo.
     poligono[0].translada(-x0,-y0); //translado todos os meus pontos em uma distância de x0 e y0 à direita.
 
+    // a seguinte linha de codigo existe a fim de debug
+    cout<<endl<<endl<<"Recebi o angulo = "<<angulo<<endl<<endl;
+
+
     float novoX, novoY;
 
     for (int i=0; i<numeroDeVertices; i++) {
 
         novoX = poligono[i].getX()*cos(angulo)+poligono[i].getY()*sin(angulo);
         novoY = -1*sin(angulo)*poligono[i].getX()+poligono[i].getY()*cos(angulo);
+
+        // o seguinte bloco de couts existem a fim de debug. Serão retirados depois
+        cout<<"Resultado pedido: "<<(-5)*sin(1.5708)+1*cos(1.5708);
+        cout<<endl<<"Para o ponto i (já mandei para a origem) = "<<i<<":\n";
+        cout<<"\t novoX = "<<novoX;
+        cout<<"\t novoY = "<<novoY;
+        cout<<"\n\n";
+
 
         //devido ao tipo float, eh preciso fazer esse tratamento:
         if(abs(novoY)<=0.0000005)
@@ -73,6 +85,14 @@ void Poligono::rotaciona (float x0, float y0, float angulo) {
             novoX = 0;
         // ao longo dos testes, os valores que deveriam ser nulos geralmente retornavam -4e-7 (-0.0000004)
         poligono[i].setXY(novoX, novoY);
+
+        //o seguinte bloco de comentários existem a fim de debug. Retirar
+        cout<<endl<<"Para o ponto i (Depois de mandar pro lugar certo) = "<<i<<":\n";
+        cout<<"\t novoX = "<<poligono[i].getX();
+        cout<<"\t novoY = "<<poligono[i].getY();
+        cout<<"\n\n";
+
+
     }
 
     poligono[0].translada(x0,y0); // colocando todos os pontos nos lugares certos
