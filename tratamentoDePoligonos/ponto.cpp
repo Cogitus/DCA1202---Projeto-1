@@ -4,18 +4,6 @@
 
 using namespace std;
 
-/*
-void setX(float _x);
-void setY(float _y);
-void setXY(float _x, float _x);
-float getX(void);
-float getY(void);
-Ponto add(Ponto p1);
-Ponto sub(Ponto p1);
-float norma(void);
-void translada(float a, float b);
-void imprime(void);
-*/
 
 Ponto::Ponto() { //construtor
 }

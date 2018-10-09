@@ -7,7 +7,7 @@ int main (void) {
     Poligono triangulo;
     
     for (int i=0; i<3; i++) {
-        triangulo.insereVertice(i,2);
+        triangulo.insereVertice(i,3);
     }
 
 
