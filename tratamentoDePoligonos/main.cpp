@@ -6,7 +6,20 @@ using namespace std;
 int main (void) {
     Poligono triangulo;
     
- 
+    for (int i=0; i<3; i++) {
+        triangulo.insereVertice(i,2);
+    }
+
+
+    cout << endl;
+
+    triangulo.imprime();
+
+    triangulo.rotaciona(2,2,60);
+
+    triangulo.imprime();
+
+ /*
     for(int i=0; i<3; i++) {
         triangulo.insereVertice(3, i);
     }
@@ -49,6 +62,6 @@ int main (void) {
     trianguloDeitado2.imprime();
     trianguloDeitado2.rotaciona(5,0,90); // rotacionar 90° em relaçao a origem
     cout<<"Triangulo apos rotacao: \n";
-    trianguloDeitado2.imprime();
+    trianguloDeitado2.imprime();*/
 
 }

@@ -80,5 +80,5 @@ void Ponto::translada(float a, float b) {
 
 
 void Ponto::imprime(void) {
-    cout << "(" << x << "," << y << ")";
+    cout << "(" << x << ", " << y << ")";
 }

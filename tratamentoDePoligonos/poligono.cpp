@@ -6,7 +6,6 @@
 using namespace std;
 
 
-
 Poligono::Poligono(){
 }
 
@@ -18,18 +17,23 @@ Poligono::~Poligono() {
 void Poligono::insereVertice(float a, float b) {
 
     if (numeroDeVertices <= 100) {
-        poligono[numeroDeVertices].setX(a);//setando o ponto seguinte começando por
-        poligono[numeroDeVertices].setY(b);//X0,Y0. Por isso temos polígono[numeroDeVertices]
-
+        poligono[numeroDeVertices].setXY(a, b);//setando o ponto seguinte começando por X0,Y0. Por isso, polígono[numeroDeVertices]
         numeroDeVertices++;//incrementando o número de vértices a medida que os adiciono.
+    } else {
+        cout << "Não foi possível inserir vértices no polígono.";
     }
 }
 
 
 void Poligono::imprime(void) {
     for (int i=0; i<numeroDeVertices; i++) {
-        cout << "(" << poligono[i].getX() << "," << poligono[i].getY() << ")\n";
+        poligono[i].imprime(); //faço uso do próprio método da classe ponto ora!
+        cout << " <--> ";
     }
+
+    poligono[0].imprime();
+
+    cout << "." << endl << endl;
 }
 
 
@@ -38,62 +42,27 @@ int Poligono::quantidadeVertices(void) {
 }
 
 
-void Poligono::translada(float a, float b) {
+void Poligono::transladaPoligono(float a, float b) {
     for(int i=0; i<numeroDeVertices; i++) {//percorre todos os meus pontos
-        poligono[i].setXY(poligono[i].getX()+a, poligono[i].getY()+b);//soma os meus pontos x+a e y+b!
+        poligono[i].translada(a, b); //translado o ponto como método já existente da classe ponto!
     }
 }
 
 
-//Rotacionar o polígono de θ graus no sentido anti-horário em torno de um ponto (x0,y0) fornecido pelo usuário
-//aparentemente, esta dando erro quando trata-se de girar em torno de um ponto fora da origem.
-void Poligono::rotaciona (float x0, float y0, float angulo) {
-    // a matriz de rotacao gira no sentido horario, precisamos girar no sentido anti horario:
-    angulo = -1*angulo;
-    // o fator de multiplicacao, para rodar em radianos
-    angulo = angulo*(M_PI/180);//fator de multiplicação = pi/180;
+void Poligono::rotaciona(float x0, float y0, float angulo) {
 
-    // isso é bizarro, mas acho melhor deixar rotaciona como uma função amiga ou algo assim
-    // devemos perceber que poligono é um conjunto de pontos e o método translada só funciona se fizermos
-    // poligono[i].translada(a,b),ainda que vá transladar todos os pontos, mas enfim.
-    // de qualquer forma, irei implementar como um metodo.
-    poligono[0].translada(-x0,-y0); //translado todos os meus pontos em uma distância de x0 e y0 à direita.
+    angulo = angulo*(M_PI/180);//convertendo o angulo para
 
-    // a seguinte linha de codigo existe a fim de debug
-    cout<<endl<<endl<<"Recebi o angulo = "<<angulo<<endl<<endl;
+    transladaPoligono(x0, y0); //desloco o eixo para esse ponto
 
+    //rotacionando as coordenadas!
+    for(int i=0; i<numeroDeVertices; i++) {
+        float x_rotacionado = poligono[i].getX()*cos(angulo) - poligono[i].getY()*sin(angulo);
+        float y_rotacionado = poligono[i].getX()*sin(angulo) + poligono[i].getY()*cos(angulo);
 
-    float novoX, novoY;
-
-    for (int i=0; i<numeroDeVertices; i++) {
-
-        novoX = poligono[i].getX()*cos(angulo)+poligono[i].getY()*sin(angulo);
-        novoY = -1*sin(angulo)*poligono[i].getX()+poligono[i].getY()*cos(angulo);
-
-        // o seguinte bloco de couts existem a fim de debug. Serão retirados depois
-        cout<<"Resultado pedido: "<<(-5)*sin(1.5708)+1*cos(1.5708);
-        cout<<endl<<"Para o ponto i (já mandei para a origem) = "<<i<<":\n";
-        cout<<"\t novoX = "<<novoX;
-        cout<<"\t novoY = "<<novoY;
-        cout<<"\n\n";
-
-
-        //devido ao tipo float, eh preciso fazer esse tratamento:
-        if(abs(novoY)<=0.0000005)
-            novoY = 0;
-        if(abs(novoX)<=0.0000005)
-            novoX = 0;
-        // ao longo dos testes, os valores que deveriam ser nulos geralmente retornavam -4e-7 (-0.0000004)
-        poligono[i].setXY(novoX, novoY);
-
-        //o seguinte bloco de comentários existem a fim de debug. Retirar
-        cout<<endl<<"Para o ponto i (Depois de mandar pro lugar certo) = "<<i<<":\n";
-        cout<<"\t novoX = "<<poligono[i].getX();
-        cout<<"\t novoY = "<<poligono[i].getY();
-        cout<<"\n\n";
-
-
+        poligono[i].setXY(x_rotacionado, y_rotacionado);
     }
 
-    poligono[0].translada(x0,y0); // colocando todos os pontos nos lugares certos
+    transladaPoligono(-x0, -y0); //retorno o sistema de eixos para a origem.
+
 }
