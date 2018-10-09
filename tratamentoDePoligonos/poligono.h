@@ -36,7 +36,7 @@ public:
     int quantidadeVertices(void);
     void transladaPoligono(float a, float b);
     void rotaciona(float x0, float y0, float angulo);
-
+    void areaPoligono(void);
 };
 
 #endif // POLIGONO_H
